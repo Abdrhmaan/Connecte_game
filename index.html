@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    
+    <h3>Seconds left: <span id="time-left">20</span></h3>
+    <h3>Result: <span id="result"></span></h3>
+
+    <button id="start-pause-button">Start/Pause</button>
+
+
+
+
+
+    <div class="grid">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="ending-block"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="log-left l1"></div>
+        <div class="log-left l2"></div>
+        <div class="log-left l3"></div>
+        <div class="log-left l4"></div>
+        <div class="log-left l5"></div>
+        <div class="log-left l1"></div>
+        <div class="log-left l2"></div>
+        <div class="log-left l3"></div>
+        <div class="log-left l4"></div>
+        <div class="log-right l5"></div>
+        <div class="log-right l1"></div>
+        <div class="log-right l2"></div>
+        <div class="log-right l3"></div>
+        <div class="log-right l4"></div>
+        <div class="log-right l5"></div>
+        <div class="log-right l1"></div>
+        <div class="log-right l2"></div>
+        <div class="log-right l3"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="car-left c1"></div>
+        <div class="car-left c2"></div>
+        <div class="car-left c3"></div>
+        <div class="car-left c1"></div>
+        <div class="car-left c2"></div>
+        <div class="car-left c3"></div>
+        <div class="car-left c1"></div>
+        <div class="car-left c2"></div>
+        <div class="car-left c3"></div>
+        <div class="car-right c1"></div>
+        <div class="car-right c2"></div>
+        <div class="car-right c3"></div>
+        <div class="car-right c1"></div>
+        <div class="car-right c2"></div>
+        <div class="car-right c3"></div>
+        <div class="car-right c1"></div>
+        <div class="car-right c2"></div>
+        <div class="car-right c3"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="starting-block frog"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <script>
+ const timeLeftDisplay = document.querySelector('#time-left')
+const resultDisplay = document.querySelector('#result')
+console.log(resultDisplay)
+const startPauseButton = document.querySelector('#start-pause-button')
+const squares = document.querySelectorAll('.grid div')
+const logsLeft = document.querySelectorAll('.log-left')
+const logsRight = document.querySelectorAll('.log-right')
+const carsLeft = document.querySelectorAll('.car-left')
+const carsRight = document.querySelectorAll('.car-right')
+
+//console.log(logleft)
+
+
+// tirada mar walp a marayo frog waaaye 
+let currentIndex = 76
+const width = 9
+let timerid
+let currentIntime = 20
+
+
+
+
+function moveFrog(e) {
+    squares[currentIndex].classList.remove('frog')
+    
+    console.log(e)
+  
+    switch(e.key) {
+        case 'ArrowLeft' :
+            console.log("xaan")
+           if(currentIndex % width !== 0) currentIndex -= 1
+
+         //    if (currentIndex % width !== 0) currentIndex -= 1
+            break
+        case 'ArrowRight' :
+        console.log("adno")
+        if (currentIndex % width < width - 1) currentIndex +=1
+      //      if (currentIndex % width < width - 1) currentIndex += 1
+            break
+        case 'ArrowUp' :
+        console.log("asmo")
+        currentIndex -= width
+           if (currentIndex - width >=0 ) currentIndex -= width
+            break
+        case 'ArrowDown' :
+        console.log("jrde")
+        currentIndex +=width
+            if (currentIndex + width < width * width) currentIndex += width
+            break
+    }
+  //  alert("hhh")
+
+ 
+  squares[currentIndex].classList.add('frog')
+}
+
+
+function movelogelements() {
+    currentIntime++
+    timeLeftDisplay.textContent = currentIntime
+    // kani ku dolwareegida logsleft
+   
+    logsLeft.forEach(logsleft => {
+        movelogleft(logsleft)
+       // console.log(logsLeft)
+
+    })
+     // kani ku dolwareegida logslright
+    logsRight.forEach(logsRight => {
+        moveright(logsRight)
+      // console.log(lo)
+
+    })
+        // kani ku dolwareegida cardllift
+        carsLeft.forEach(cardleft => {
+        cardmeovelifte(cardleft)
+        console.log(cardleft)
+
+    })
+    carsRight.forEach(cardright => {
+        cardmeoveright(cardright)
+        console.log(cardright)
+
+    })
+
+
+    
+ 
+    lose()
+    win()
+}
+
+
+function movelogleft(logsleft) {
+    switch(true) {
+        case logsleft.classList.contains('l1') :
+        logsleft.classList.remove('l1')
+        logsleft.classList.add('l2')
+            break
+        case logsleft.classList.contains('l2') :
+            logsleft.classList.remove('l2')
+            logsleft.classList.add('l3')
+            break
+        case logsleft.classList.contains('l3') :
+            logsleft.classList.remove('l3')
+            logsleft.classList.add('l4')
+            break
+        case logsleft.classList.contains('l4') :
+            logsleft.classList.remove('l4')
+            logsleft.classList.add('l5')
+            break
+        case logsleft.classList.contains('l5') :
+            logsleft.classList.remove('l5')
+            logsleft.classList.add('li')
+            break
+    }
+}
+
+function moveright(movelogleft) {
+    switch(true) {
+        case movelogleft.classList.contains('l1') :
+        movelogleft.classList.remove('l1')
+        movelogleft.classList.add('l5')
+            break
+        case movelogleft.classList.contains('l2') :
+            movelogleft.classList.remove('l2')
+            movelogleft.classList.add('l1')
+            break
+        case movelogleft.classList.contains('l3') :
+            movelogleft.classList.remove('l3')
+            movelogleft.classList.add('l4')
+            break
+        case movelogleft.classList.contains('l4') :
+            movelogleft.classList.remove('l4')
+            movelogleft.classList.add('l5')
+            break
+        case movelogleft.classList.contains('l5') :
+        movelogleft.classList.remove('l5')
+        movelogleft.classList.add('li')
+            break
+    }
+}
+       
+function cardmeovelifte(cardleft ) {
+    switch(true) {
+        case cardleft.classList.contains('c1') :
+        cardleft.classList.remove('c1')
+        cardleft.classList.add('c2')
+            break
+        case cardleft.classList.contains('c2') :
+            cardleft.classList.remove('c2')
+            cardleft.classList.add('c3')
+            break
+        case cardleft.classList.contains('c3') :
+            cardleft.classList.remove('c3')
+            cardleft.classList.add('c4')
+            break
+        case cardleft.classList.contains('c4') :
+            cardleft.classList.remove('c4')
+            cardleft.classList.add('c1')
+            break
+      
+    }
+}
+function cardmeoveright(cardright) {
+    switch(true) {
+        case cardright.classList.contains('c1') :
+        cardright.classList.remove('c1')
+        cardright.classList.add('c2')
+            break
+        case cardright.classList.contains('c2') :
+            cardright.classList.remove('c2')
+            cardright.classList.add('c3')
+            break
+        case cardright.classList.contains('c3') :
+            cardright.classList.remove('c3')
+            cardright.classList.add('c4')
+            break
+        case cardright.classList.contains('c4') :
+            cardright.classList.remove('c4')
+            cardright.classList.add('c1')
+            break
+      
+    }
+}
+
+
+
+
+
+
+function lose() {
+
+
+    if(squares[currentIndex].classList.contains("c1") ||
+    squares[currentIndex].classList.contains("l4")||
+    squares[currentIndex].classList.contains("l5"),
+     currentIntime<=0
+    
+    ){
+        resultDisplay.textContent = 'you lose !'
+        clearInterval(timerid)
+        squares[currentIndex].classList.remove("frog")
+        document.removeEventListener("keyup", moveFrog)
+    }
+    
+}
+
+function win() {
+
+
+if(squares[currentIndex].classList.contains("ending-block")){
+    resultDisplay.textContent = 'you win !'
+    clearInterval(timerid)
+   
+    document.removeEventListener("keyup", moveFrog)
+}
+
+}
+
+
+
+
+startPauseButton.addEventListener("click" , ()=> {
+    if(timerid){
+        clearInterval(timerid)
+    }else {
+    let     timerid =setInterval(movelogelements ,1000)
+        document.addEventListener("keyup", moveFrog)
+    }
+})
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
